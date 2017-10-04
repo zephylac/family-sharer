@@ -1,0 +1,26 @@
+.thumbnail{
+        position: relative;
+}
+
+.overlay{
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        opacity: 0;
+        height: 0;
+}
+
+.thumbnail:hover .overlay{
+        height: auto;
+        opacity: 1;
+}
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  height: 100%;
+  width : 100%
+}
