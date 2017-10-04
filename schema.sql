@@ -4,3 +4,9 @@ create table admin (
   password text not null,
   level text not null
 );
+
+create table invkey (
+  id integer primary key autoincrement,
+  key text not null,
+  level integer
+);
