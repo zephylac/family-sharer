@@ -1,6 +1,21 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="container">
+  <!-- The Modal -->
+  <div id="ModalImg" class="modal modal-overwrite">
+    <!-- The Close Button -->
+    <span id="img-close" onclick="document.getElementById('ModalImg').style.display='none'">&times;</span>
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content content-overwrite" id="img-content">
+    <!-- Modal Caption (Image Text) -->
+    <div id="img-caption"></div>
+  </div>
+
+
+
+
+
+
   <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -156,14 +171,12 @@
     <div class="col-lg-2">
       <div class="thumbnail"> 
         {% if file.img == 1 %}
-        <img src="{{file.path}}" alt="{{file.path}}">
+        <!-- Trigger the modal ModalImg-->
+        <img src="{{file.path}}" class="img-modal" alt="{{file.path}}">
         {% else %}
          <h1 class="text-center"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></h1>
+	  {{file.name}}
         {% endif %}        
-        <div class="caption">
-          {{ file.name }}
-          {{ file.ext }}
-        </div>
         <div class="overlay">
           <a href="#!/" class="btn btn-default btn-xs" onclick='document.getElementById("delfile{{loop.index}}").submit()' >
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
