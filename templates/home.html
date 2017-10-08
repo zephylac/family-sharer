@@ -117,7 +117,7 @@
   <li class="active">{{ path.path }}</li>
   {% else %}
   <li>
-    <a href='#' onclick='document.getElementById("path{{loop.index}}").submit()'>{{ path.path }}</a>
+    <a href='#!/' onclick='document.getElementById("path{{loop.index}}").submit()'>{{ path.path }}</a>
     <form id="path{{loop.index}}" method="POST" action={{ url_for('switchdir') }} >
       <input type="hidden" name="backpath" value="{{ path.backpath }}"/>
     </form>
@@ -125,28 +125,59 @@
   {% endif %}
   {% endfor %}
 </ul>
-  <div class="row">
+  <div class="row display-flex">
   {% for dir in dir %}
     <form id="dir{{loop.index}}" method="POST" action={{ url_for('home') }} >
       <input type="hidden" name="dir" value="{{dir}}"/>
     </form>
-    <a href='#' onclick='document.getElementById("dir{{loop.index}}").submit()'>
-    <div class="col-lg-2">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          {{ dir }}
+    <a href='#!/' onclick='document.getElementById("dir{{loop.index}}").submit()'>
+      <div class="col-lg-2">
+        <div class="thumbnail">
+          <h1 class="text-center"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></h1>
+          <div class="caption">
+            <div class="pull-right mb-auto">
+            {{ dir }}
+            </div>
+          </div>
+          <div class="overlay">
+            <a href="#!/" class="btn btn-default btn-xs" onclick='document.getElementById("deldir{{loop.index}}").submit()' >
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </a>
+            <form id="deldir{{loop.index}}" method="POST" action={{ url_for('deldir') }} >
+              <input type="hidden" name="deldir" value="{{dir}}"/>
+            </form> 
+          </div> 
         </div>
       </div>
-    </div>
     </a>
   {% endfor %}
+
   {% for file in file %}
     <div class="col-lg-2">
-      <div class="panel panel-success">
-        <div class="panel-body"> 
+      <div class="thumbnail"> 
+        {% if file.img == 1 %}
+        <img src="{{file.path}}" alt="{{file.path}}">
+        {% else %}
+         <h1 class="text-center"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></h1>
+        {% endif %}        
+        <div class="caption">
           {{ file.name }}
           {{ file.ext }}
         </div>
+        <div class="overlay">
+          <a href="#!/" class="btn btn-default btn-xs" onclick='document.getElementById("delfile{{loop.index}}").submit()' >
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          </a>
+          <a href="#!/" class="btn btn-default btn-xs" onclick='document.getElementById("downfile{{loop.index}}").submit()' >
+            <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+          </a>
+          <form id="delfile{{loop.index}}" method="POST" action={{ url_for('delfile') }} >
+            <input type="hidden" name="delfile" value="{{file.name}}{{file.ext}}"/>
+          </form> 
+          <form id="downfile{{loop.index}}" method="POST" action={{ url_for('downfile') }} >
+            <input type="hidden" name="downfile" value="{{file.name}}{{file.ext}}"/>
+          </form> 
+        </div>      
       </div>
     </div>
   {% endfor %}

@@ -10,6 +10,19 @@
         height: 0;
 }
 
+.overlay-table{
+        position: absolute;
+        top : 10;
+	right: 10%;
+        opacity: 0;
+        height: 0;
+}
+
+.opt:hover .overlay-table{
+        opacity: 1;
+        height: auto;
+}
+
 .thumbnail:hover .overlay{
         height: auto;
         opacity: 1;
